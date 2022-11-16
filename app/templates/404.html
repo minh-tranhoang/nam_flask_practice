@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block ul %}
+     <li role="presentation" class="active">
+         <a href="/">Home</a>
+     </li>
+     <li role="presentation">
+         <a href="/showSignUp">Sign Up</a>
+     </li>
+     <li role="presentation">
+        <a href="/showSignIn">Sign In</a>
+    </li>
+{% endblock %}
+{% block div %}
+<h2>404 Not Found</h2>
+<p>The specified file was not found on this website. Please check the URL for mistakes and try again.</p>
+{% endblock %}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>Test App</title>
+
+        <link href="{{ url_for('static', filename = 'bootstrap.min.css') }}" rel="stylesheet">
+
+        <link href="{{ url_for('static', filename = 'jumbotron-narrow.css') }}" rel="stylesheet">
+
+        <link href="{{ url_for('static', filename = 'style.css') }}" rel="stylesheet">
+
+        <style>
+            label{
+                text-align: left;
+                color: red;
+                font-size: 20px;
+                font-weight: normal
+            }
+        </style>
+
+    </head>
+
+    <body>
+
+        <div class="container">
+            <div class="header">
+                <nav>
+                    <ul class="nav nav-pills pull-right">
+                        {% block ul %}
+                        {% endblock %}
+                    </ul>
+                </nav>
+
+                <h3 class="text-primary"><a href="/" style="text-decoration: none">Test App</a></h3>
+            </div>
+
+            <div class="jumbotron">
+                {% block div %}
+                {% endblock %}
+            </div>
+
+            <footer class="footer">
+                <p>&copy;2022</p>
+            </footer>
+        </div>
+
+    </body>
+</html>

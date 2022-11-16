@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block ul %}
+     <li role="presentation" class="active">
+         <a href="/">Home</a>
+     </li>
+     <li role="presentation">
+         <a href="/showSignUp">Sign Up</a>
+     </li>
+     <li role="presentation">
+        <a href="/showSignIn">Sign In</a>
+    </li>
+{% endblock %}
+{% block div %}
+        <h1>Test App</h1>
+        <p class="lead"></p>
+        <p><a class="btn btn-lg btn-success" href="showSignUp" role="button">Sign up</a>
+        </p>
+        
+        <div class="space"></div>
+
+        <h4>Task 1</h4>
+        <p>Application Factories</p>
+
+        <h4>Task 2</h4>
+        <p>Blueprint</p>
+
+        <h4>Task 3</h4>
+        <p>Error Handling</p>
+
+        <h4>Task 4</h4>
+        <p>Config file</p>
+{% endblock %}
