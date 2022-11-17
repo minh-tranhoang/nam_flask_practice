@@ -1,4 +1,6 @@
-from app import app
+from app import create_app
+
+application = create_app('config')
 
 if __name__ == "__main__":
-    app.run(port=3000)
+    application.run(port=3000)
