@@ -1,6 +1,8 @@
+import os
 from app import create_app
 
-application = create_app('config')
+
+app= create_app('development')
 
 if __name__ == "__main__":
-    application.run(port=3000)
+    app.run(port=3000)

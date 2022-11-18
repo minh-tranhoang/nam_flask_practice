@@ -5,16 +5,16 @@
          <a href="/">Home</a>
      </li>
      <li role="presentation">
-         <a href="/showSignUp">Sign Up</a>
-     </li>
-     <li role="presentation">
-        <a href="/showSignIn">Sign In</a>
+        <a href="{{ url_for('auth.signup') }}">Sign Up</a>
+    </li>
+    <li role="presentation">
+       <a href="{{ url_for('auth.signin') }}">Sign In</a>
     </li>
 {% endblock %}
 {% block div %}
         <h1>Test App</h1>
         <p class="lead"></p>
-        <p><a class="btn btn-lg btn-success" href="showSignUp" role="button">Sign up</a>
+        <p><a class="btn btn-lg btn-success" href="{{ url_for('auth.signup') }}"role="button">Sign up</a>
         </p>
         
         <div class="space"></div>

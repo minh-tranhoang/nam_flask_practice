@@ -1,25 +1,26 @@
-# Statement for enabling the development environment
-DEBUG = True
-
-# Define the application directory
 import os
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
-# Application threads. A common general assumption is
-# using 2 per available processor cores - to handle
-# incoming requests using one and performing background
-# operations using the other.
-THREADS_PER_PAGE = 2
+class Config:
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-# Enable protection agains *Cross-site Request Forgery (CSRF)*
-CSRF_ENABLED     = True
+    @staticmethod
+    def init_app(app):
+        pass
 
-# Use a secure, unique and absolutely secret key for
-# signing the data. 
-CSRF_SESSION_KEY = "secret"
+class DevelopmentConfig(Config):
+    DEBUG = True
+    SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://<username>:<password>@localhost/<db_name>'
 
-# Secret key for signing cookies
-SECRET_KEY = "secret"
 
-# Auto reload templates
-TEMPLATES_AUTO_RELOAD = True
+class TestingConfig(Config):
+   DEBUG = True
+   TESTING = True
+   SQLALCHEMY_DATABASE_URI = os.environ.get("TEST_DATABASE_URL")
+
+
+config = {
+   'development': DevelopmentConfig,
+   'testing': TestingConfig,
+
+   'default': DevelopmentConfig}

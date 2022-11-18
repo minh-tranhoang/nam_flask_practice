@@ -5,10 +5,10 @@
          <a href="/">Home</a>
      </li>
      <li role="presentation">
-         <a href="/showSignUp">Sign Up</a>
+         <a href="{{ url_for('auth.signup') }}">Sign Up</a>
      </li>
      <li role="presentation">
-        <a href="/showSignIn">Sign In</a>
+        <a href="{{ url_for('auth.signin') }}">Sign In</a>
     </li>
 {% endblock %}
 {% block div %}

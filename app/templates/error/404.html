@@ -5,13 +5,13 @@
          <a href="/">Home</a>
      </li>
      <li role="presentation">
-         <a href="/showSignUp">Sign Up</a>
+         <a href="{{ url_for('auth.signup') }}">Sign Up</a>
      </li>
      <li role="presentation">
-        <a href="/showSignIn">Sign In</a>
+        <a href="{{ url_for('auth.signin') }}">Sign In</a>
     </li>
 {% endblock %}
 {% block div %}
-<h2>500 Internal Server Error</h2>
-<p>This browser is not supported.</p>
+<h2>404 Not Found</h2>
+<p>The specified file was not found on this website. Please check the URL for mistakes and try again.</p>
 {% endblock %}
