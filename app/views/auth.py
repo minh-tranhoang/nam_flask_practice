@@ -4,14 +4,24 @@ from app.db import get_db
 from werkzeug.security import generate_password_hash, check_password_hash
 import textwrap
 from app.views import Response, get_response
+from marshmallow import Schema, ValidationError, validate, fields
 
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 
+class UserSchema(Schema):
+    username = fields.Str(required=True, validate=validate.Length(min=1, error="ユーザー名が空でないため登録・ログインできません。"))
+    email = fields.Email()
+    password = fields.Str(required=True, validate=validate.Length(min=6, error=f"パスワードは６文字以上でなければなりません。"))
+    id = fields.Int()
+    create_at = fields.DateTime()
+
+
 @auth_bp.route('/signin', methods=('GET', 'POST'))
 def signin():
     response = Response()
+    schema = UserSchema()
 
     if request.method == "POST":
         username = request.form['username']
@@ -60,6 +70,7 @@ def signin():
 @auth_bp.route('/signup', methods=('GET', 'POST'))
 def signup():
     response = Response()
+    schema = UserSchema()
 
     if request.method == "POST":
         username = request.form["username"]
@@ -80,12 +91,11 @@ def signup():
             "email": email
         }
 
-        if not username:
-            error = "Username is required."
-        elif not email:
-            error = "Email is required."
-        elif not password:
-            error = "Password is required."
+        try:
+            result = schema.load(response.result)
+        except ValidationError as err:
+            error = err.messages
+            response.message = f"登録失敗。{error}"
 
         if error is None:
             try:
