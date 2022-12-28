@@ -1,9 +1,10 @@
 import os
 import textwrap
+
 import click
 import mysql.connector as db
 from dotenv import load_dotenv
-from flask import current_app, g
+from flask import g
 
 load_dotenv()
 username = os.getenv('DB_USER')

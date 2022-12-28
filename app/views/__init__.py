@@ -1,12 +1,14 @@
 import json
+
 from flask import make_response
 
 
 class Response:
     def __init__(self):
-        self.status = 1
+        self.status = "success"
         self.message = "システムエラーが発生しました。"
-        self.result = {}
+        self.data = {}
+        self.token = {}
 
 
 def obj_to_dict(obj):

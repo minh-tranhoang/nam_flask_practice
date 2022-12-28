@@ -1,7 +1,9 @@
 import os
-from flask import Flask, render_template, url_for, jsonify
-from config import ProductionConfig, DevelopmentConfig, TestingConfig
+
 from dotenv import load_dotenv
+from flask import Flask, jsonify
+
+from config import DevelopmentConfig, ProductionConfig, TestingConfig
 
 load_dotenv()
 
@@ -17,7 +19,7 @@ def create_app(config_name):
     else:
         app.config.from_object(TestingConfig)
 
-    app.secret_key = 'super secret key'
+    app.secret_key = app.config['SECRET_KEY']
     app.config['SESSION_TYPE'] = 'filesystem'
 
     register_blueprints(app)
@@ -29,8 +31,8 @@ def create_app(config_name):
 
 
 def register_blueprints(app):
-    from app.views.home import home_bp
     from app.views.auth import auth_bp
+    from app.views.home import home_bp
     
     app.register_blueprint(home_bp)
     app.register_blueprint(auth_bp)
@@ -46,7 +48,8 @@ def register_error_handlers(app):
     # 403 - Forbidden
     @app.errorhandler(403)
     def forbidden(e):
-        return jsonify({"error": True, "message": "Forbidden - You don't have permission to access on this server."}), e.code
+        return jsonify({"error": True, "message": "Forbidden - You don't have permission to access on this server."}), \
+               e.code
 
     # 404 - Page Not Found
     @app.errorhandler(404)
